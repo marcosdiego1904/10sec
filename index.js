@@ -1,9 +1,7 @@
 function randomNumbers(){
-    let injectRandom = document.querySelector(".number");
     let arrayNumbers = [1,2,3,4,5,6,7,8,9];
     let first = _.first(_.shuffle(arrayNumbers));
     let second = _.last(_.shuffle(arrayNumbers));
-    injectRandom.innerHTML = `${first} + ${second}`;
     return {first,second};
 }
 
@@ -42,10 +40,41 @@ function alerts(){
         console.log("thanks")
     }
 }
-function generateAndSetAnswer() {
+let mainValue;
+let add = function addNumbers() {
+    let injectRandom = document.querySelector(".number");
     let {first, second} = randomNumbers();
-    answer = first + second;
-}
+    injectRandom.innerHTML = `${first} + ${second}`;
+    mainValue = first + second;
+};
+
+let subtract = function subtractNumbers() {
+    let injectRandom = document.querySelector(".number");
+    let {first, second} = randomNumbers();
+    
+    if(first > second){
+        mainValue = first - second;
+        injectRandom.innerHTML = `${first} - ${second}`;
+    }else if(second>first){
+        mainValue = second - first;
+        injectRandom.innerHTML = `${second} - ${first}`;
+    }
+    
+};
+
+let multiply = function multiplyNumbers() {
+    let injectRandom = document.querySelector(".number");
+    let {first, second} = randomNumbers();
+    injectRandom.innerHTML = `${first} * ${second}`;
+    mainValue = first * second;
+};
+
+let divide = function divideNumbers() {
+    let injectRandom = document.querySelector(".number");
+    let {first, second} = randomNumbers();
+    injectRandom.innerHTML = `${first} / ${second}`;
+    mainValue = Math.ceil(first / second);
+};
 let highScore = 0;
 let scores = 0;
 function score(){
@@ -63,14 +92,18 @@ $(document).ready(function() {
 
 function logic(){
     timer(); 
-
-    generateAndSetAnswer();
-
+    let operations = [add, subtract, multiply, divide]; 
+    let numberss = [0,1,2,3]
+    let randomOperation = operations[_.first(_.shuffle(numberss))]; 
+   randomOperation();
+    
     $('.userin').on('input', function() {
+        operations = [add, subtract, multiply, divide]; 
         let userInput = $(".userin").val();
-        if (userInput == answer) {
+        if (userInput ==  mainValue) {
             console.log('User input:', userInput);
-            generateAndSetAnswer();
+            let randomOperation2 = operations[_.first(_.shuffle(numberss))];
+            randomOperation2();
             $(".userin").val("");
             clearInterval(intervalo); 
             tiempoRestante++; 

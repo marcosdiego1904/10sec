@@ -72,8 +72,15 @@ let multiply = function multiplyNumbers() {
 let divide = function divideNumbers() {
     let injectRandom = document.querySelector(".number");
     let {first, second} = randomNumbers();
-    injectRandom.innerHTML = `${first} / ${second}`;
-    mainValue = Math.ceil(first / second);
+    if(first > second){
+        mainValue = Math.ceil(first / second);
+        injectRandom.innerHTML = `${first} / ${second}`;
+    }else if(second>first){
+        mainValue = Math.ceil(first / second);
+        injectRandom.innerHTML = ` ${second} / ${first}`;
+    }
+  
+   
 };
 let highScore = 0;
 let scores = 0;

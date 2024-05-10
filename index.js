@@ -75,7 +75,7 @@ let divide = function divideNumbers() {
     
       let c  = Math.ceil(first * second);
         mainValue = Math.ceil(c/first) 
-        injectRandom.innerHTML = `${first} / ${c}`;
+        injectRandom.innerHTML = `${c} / ${first}`;
 };
 let highScore = 0;
 let scores = 0;
